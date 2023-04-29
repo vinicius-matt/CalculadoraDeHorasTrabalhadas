@@ -8,31 +8,60 @@
   <body>
     <h1>Calculadora de salário</h1>
     <form>
-      <label for="valor-hora">Valor da hora de trabalho:</label>
-      <input type="number" id="valor-hora" step="0.01" min="0" required>
-      <br>
-      <label for="mes">Mês:</label>
-      <select id="mes">
-        <option value="1">Janeiro</option>
-        <option value="2">Fevereiro</option>
-        <option value="3">Março</option>
-        <option value="4">Abril</option>
-        <option value="5">Maio</option>
-        <option value="6">Junho</option>
-        <option value="7">Julho</option>
-        <option value="8">Agosto</option>
-        <option value="9">Setembro</option>
-        <option value="10">Outubro</option>
-        <option value="11">Novembro</option>
-        <option value="12">Dezembro</option>
-      </select>
-      <label for="ano">Ano:</label>
-      <input type="number" id="ano" min="1900" max="2100" required>
-      <br>
+      <div class="input-group">
+        <label for="valor-hora">Valor da hora de trabalho:</label>
+        <input type="number" id="valor-hora" step="0.01" min="0" required>
+      </div>
+      <div class="input-group">
+        <label for="mes">Mês:</label>
+        <select id="mes">
+          <option value="1">Janeiro</option>
+          <option value="2">Fevereiro</option>
+          <option value="3">Março</option>
+          <option value="4">Abril</option>
+          <option value="5">Maio</option>
+          <option value="6">Junho</option>
+          <option value="7">Julho</option>
+          <option value="8">Agosto</option>
+          <option value="9">Setembro</option>
+          <option value="10">Outubro</option>
+          <option value="11">Novembro</option>
+          <option value="12">Dezembro</option>
+        </select>
+        <label for="ano">Ano:</label>
+        <input type="number" id="ano" min="1900" max="2100" required>
+      </div>
+      <div class="input-group">
+        <label for="dia">Dia:</label>
+        <input type="number" id="dia" min="1" max="31" required>
+        <label for="diaSemana">Dia da semana:</label>
+        <select id="diaSemana">
+          <option value="0">Domingo</option>
+          <option value="1">Segunda-feira</option>
+          <option value="2">Terça-feira</option>
+          <option value="3">Quarta-feira</option>
+          <option value="4">Quinta-feira</option>
+          <option value="5">Sexta-feira</option>
+          <option value="6">Sábado</option>
+        </select>
+        <label for="horasTrabalhadas">Horas trabalhadas:</label>
+        <input type="number" id="horasTrabalhadas" step="0.01" min="0" required>
+        <button type="button" onclick="adicionarRegistro()">Adicionar registro</button>
+      </div>
       <button type="button" onclick="calcular()">Calcular</button>
+      <button type="button" onclick="limpar()">Limpar</button>
     </form>
     <br>
     <table id="tabela">
+      <thead>
+        <tr>
+          <th>Dia</th>
+          <th>Dia da semana</th>
+          <th>Horas trabalhadas</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
     </table>
     <br>
     <div id="resultado"></div>

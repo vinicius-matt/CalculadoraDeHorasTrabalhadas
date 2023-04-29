@@ -1,36 +1,46 @@
+let registros = [];
+
+function adicionarRegistro() {
+  const valorHora = parseFloat(document.getElementById('valor-hora').value);
+  const mes = parseInt(document.getElementById('mes').value);
+  const ano = parseInt(document.getElementById('ano').value);
+  const dia = parseInt(document.getElementById('dia').value);
+  const diaSemana = parseInt(document.getElementById('diaSemana').value);
+  const horasTrabalhadas = parseFloat(document.getElementById('horasTrabalhadas').value);
+
+  registros.push({
+    valorHora,
+    mes,
+    ano,
+    dia,
+    diaSemana,
+    horasTrabalhadas,
+  });
+
+  const tabela = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+  const newRow = tabela.insertRow();
+  const newDia = newRow.insertCell(0);
+  const newDiaSemana = newRow.insertCell(1);
+  const newHorasTrabalhadas = newRow.insertCell(2);
+  newDia.innerHTML = dia;
+  newDiaSemana.innerHTML = document.getElementById('diaSemana').options[diaSemana].text;
+  newHorasTrabalhadas.innerHTML = horasTrabalhadas;
+}
+
 function calcular() {
-    const valorHora = document.getElementById('valor-hora').value;
-    const mes = document.getElementById('mes').value;
-    const ano = document.getElementById('ano').value;
-    
-    const diasNoMes = new Date(ano, mes, 0).getDate();
-    let totalHoras = 0;
-    
-    const tabela = document.getElementById('tabela');
-    tabela.innerHTML = `
-      <tr>
-        <th>Dia</th>
-        <th>Horas trabalhadas</th>
-        <th>Valor a receber</th>
-      </tr>
-    `;
-    
-    for (let i = 1; i <= diasNoMes; i++) {
-      const horas = Number(prompt(`Digite as horas trabalhadas no dia ${i}:`));
-      const valorReceber = horas * valorHora;
-      totalHoras += horas;
-      
-      tabela.innerHTML += `
-        <tr>
-          <td>${i}</td>
-          <td>${horas.toFixed(2)}</td>
-          <td>R$ ${valorReceber.toFixed(2)}</td>
-        </tr>
-      `;
-    }
-    
-    const resultado = document.getElementById('resultado');
-    const salario = totalHoras * valorHora;
-    resultado.innerHTML = `Seu salário neste mês é de R$ ${salario.toFixed(2)}.`;
-  }
-  
+  const valorTotal = registros.reduce((acc, registro) => acc + registro.valorHora * registro.horasTrabalhadas, 0);
+  const horasTotal = registros.reduce((acc, registro) => acc + registro.horasTrabalhadas, 0);
+  const mediaHora = valorTotal / horasTotal;
+  const resultado = document.getElementById('resultado');
+  resultado.innerHTML = `Valor total: R$${valorTotal.toFixed(2)}<br>
+                          Horas trabalhadas: ${horasTotal.toFixed(2)}<br>
+                          Média por hora: R$${mediaHora.toFixed(2)}`;
+}
+
+function limpar() {
+  registros = [];
+  const tabela = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+  tabela.innerHTML = '';
+  const resultado = document.getElementById('resultado');
+  resultado.innerHTML = '';
+}
